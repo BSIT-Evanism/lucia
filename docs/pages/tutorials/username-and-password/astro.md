@@ -1,4 +1,4 @@
----
+w---
 title: "Tutorial: Username and password auth in Astro"
 ---
 
@@ -210,8 +210,8 @@ export async function POST(context: APIContext): Promise<Response> {
 			status: 400
 		});
 	}
-
-	const session = await lucia.createSession(userId, {});
+	//use the id from the queried existing user to match with the fk for the session
+	const session = await lucia.createSession(existingUser.id, {});
 	const sessionCookie = lucia.createSessionCookie(session.id);
 	context.cookies.set(sessionCookie.name, sessionCookie.value, sessionCookie.attributes);
 
